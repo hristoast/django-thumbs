@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Django-thumbs : Fork of django-thumbs (http://djangothumbnails.com/) for Python 3">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Django-thumbs</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hristoast/django-thumbs">View on GitHub</a>
+
+          <h1 id="project_title">Django-thumbs</h1>
+          <h2 id="project_tagline">Fork of django-thumbs (http://djangothumbnails.com/) for Python 3</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/hristoast/django-thumbs/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/hristoast/django-thumbs/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="djangothumbs.jpg" alt="Django-thumbs logo"></p>
+
+<h1>
+<a name="django-thumbs" class="anchor" href="#django-thumbs"><span class="octicon octicon-link"></span></a>Django-thumbs</h1>
+
+<hr>
+
+<p>Django-thumbs is the easiest way to create thumbnails for your ImageFields with Django.
+You can integrate it easily in your code and it works with any StorageBackend. </p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<hr>
+
+<ul>
+<li>Easy to integrate in your code (no database changes, works as an ImageField)</li>
+<li>Works perfectly with any StorageBackend</li>
+<li>Generates thumbnails after image is uploaded into memory</li>
+<li>Deletes thumbnails when the image file is deleted</li>
+<li>Provides easy access to the thumbnails' URLs (similar method as with ImageField)</li>
+</ul>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ol>
+<li>Download <code>thumbs.py</code>
+</li>
+<li>Import it in your <em>models.py</em> and replace <code>ImageField</code> with <code>ImageWithThumbsField</code> in your model</li>
+<li>Add a <code>sizes</code> attribute with a list of sizes you want to use for the thumbnails </li>
+<li>Make sure your have defined <code>MEDIA_URL</code> or <code>STATIC_URL</code> in your settings.py</li>
+<li>That's it!</li>
+</ol>
+
+<h2>
+<a name="working-example" class="anchor" href="#working-example"><span class="octicon octicon-link"></span></a>Working Example</h2>
+
+<p><em>models.py</em></p>
+
+<pre><code>from django.db import models
+from thumbs import ImageWithThumbsField
+
+class Person(models.Model):
+    photo = ImageWithThumbsField(upload_to='images', sizes=((125,125),(200,200)))
+    second_photo = ImageWithThumbsField(upload_to='images')
+</code></pre>
+
+<p>In this example we have a <code>Person</code> model with 2 image fields.</p>
+
+<p>You can see the field <code>second_photo</code> doesn't have a sizes attribute. This field works exactly the same way as a normal <code>ImageField</code>.</p>
+
+<p>The field <code>photo</code> has a <code>sizes</code> attribute specifying desired sizes for the thumbnails. This field works the same way as <code>ImageField</code> but it also creates the desired thumbnails when uploading a new file and deletes the thumbnails when deleting the file.</p>
+
+<p>With <code>ImageField</code> you retrieve the URL for the image with: <code>someone.photo.url</code> With <code>ImageWithThumbsField</code> you retrieve it the same way. You also retrieve the URL for every thumbnail specifying its size: In this example we use <code>someone.photo.url_125x125</code> and <code>someone.photo.url_200x200</code> to get the URL of both thumbnails. </p>
+
+<h2>
+<a name="uninstall" class="anchor" href="#uninstall"><span class="octicon octicon-link"></span></a>Uninstall</h2>
+
+<p>At any time you can go back and use <code>ImageField</code> again without altering the database or anything else. Just replace <code>ImageWithThumbsField</code> with <code>ImageField</code> again and make sure you delete the <code>sizes</code> attribute. Everything will work the same way it worked before using django-thumbs. Just remember to delete generated thumbnails in the case you don't want to have them anymore. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Django-thumbs maintained by <a href="https://github.com/hristoast">hristoast</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
