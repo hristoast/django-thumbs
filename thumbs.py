@@ -39,8 +39,8 @@ def generate_thumb(img, thumb_size, img_format):
         # get minimum size
         minsize = min(x_size, y_size)
         # largest square possible in the image
-        x_new_size = (x_size - minsize) / 2
-        y_new_size = (y_size - minsize) / 2
+        x_new_size = (x_size - minsize) // 2
+        y_new_size = (y_size - minsize) // 2
         # crop it
         image2 = image.crop((x_new_size, y_new_size, x_size - x_new_size, y_size - y_new_size))
         # load is necessary after crop
